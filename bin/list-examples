@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+# Copyright 2026 Mark Kimberly Howe. Licensed under the MIT License.
+
+set -eu
+
+repository_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+
+for example_dir in "$repository_dir"/examples/*; do
+    [ -d "$example_dir" ] || continue
+    basename "$example_dir"
+done
