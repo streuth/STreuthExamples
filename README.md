@@ -48,9 +48,19 @@ others.
    that produces and displays a real HTML document.
 8. [`08_finite_state_machine`](examples/08_finite_state_machine/README.md) —
    typed inputs move a model through explicitly declared states.
+9. [`09_html_actions_and_forms`](examples/09_html_actions_and_forms/README.md) —
+   a native HTML form becomes a typed action that updates a model and rerenders
+   the page.
 
 The sequence should grow only when each new example teaches one additional idea
 without requiring a tour of the whole language.
+
+## Contributing
+
+Start experimental work in your own `STreuthWorkspace`, then propose a focused,
+runnable lesson here through a pull request. The
+[four-repository, three-layer collaboration model](https://github.com/streuth/STreuth/blob/master/doc/COLLABORATION_MODEL.md)
+describes the repository roles, promotion path, and core review boundary.
 
 ## Example standard
 

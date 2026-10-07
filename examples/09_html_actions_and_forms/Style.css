@@ -1,0 +1,13 @@
+/* Copyright 2026 Mark Kimberly Howe. Licensed under the MIT License. */
+
+body {
+  font-family: system-ui, sans-serif;
+  margin: 2rem;
+  color: #243047;
+}
+
+form {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 24rem;
+}
