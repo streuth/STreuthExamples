@@ -57,6 +57,9 @@ others.
 11. [`11_result_driven_validation`](examples/11_result_driven_validation/README.md)
     — a `Result` carries zero, one, or many validation problems so custom input
     handlers can reject payloads with useful feedback and no `nil` convention.
+12. [`12_protocols_and_exposed_capabilities`](examples/12_protocols_and_exposed_capabilities/README.md)
+    — `exposes:` publishes one receiver's selectors, while a protocol declares
+    the reusable capability contract generic code may require.
 
 The sequence should grow only when each new example teaches one additional idea
 without requiring a tour of the whole language.
