@@ -63,6 +63,9 @@ others.
 13. [`13_watches_and_reactive_refresh`](examples/13_watches_and_reactive_refresh/README.md)
     — a view watches one explicit FSM revision, redraws after inputs, and
     detaches stale subscriptions when it follows another machine.
+14. [`14_keymap_chord_dsl`](examples/14_keymap_chord_dsl/README.md) — typed
+    builder syntax becomes FSM inputs, a normalized chord, and finally a
+    semantic editor command binding.
 
 The sequence should grow only when each new example teaches one additional idea
 without requiring a tour of the whole language.
