@@ -54,6 +54,9 @@ others.
 10. [`10_reusable_fsm_input_views`](examples/10_reusable_fsm_input_views/README.md)
     — payload-free FSM inputs keep the default action path, while reusable input
     views render and handle the inputs that need values.
+11. [`11_result_driven_validation`](examples/11_result_driven_validation/README.md)
+    — a `Result` carries zero, one, or many validation problems so custom input
+    handlers can reject payloads with useful feedback and no `nil` convention.
 
 The sequence should grow only when each new example teaches one additional idea
 without requiring a tour of the whole language.
