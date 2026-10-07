@@ -51,6 +51,9 @@ others.
 9. [`09_html_actions_and_forms`](examples/09_html_actions_and_forms/README.md) —
    a native HTML form becomes a typed action that updates a model and rerenders
    the page.
+10. [`10_reusable_fsm_input_views`](examples/10_reusable_fsm_input_views/README.md)
+    — payload-free FSM inputs keep the default action path, while reusable input
+    views render and handle the inputs that need values.
 
 The sequence should grow only when each new example teaches one additional idea
 without requiring a tour of the whole language.
