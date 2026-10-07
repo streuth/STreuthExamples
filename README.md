@@ -66,6 +66,9 @@ others.
 14. [`14_keymap_chord_dsl`](examples/14_keymap_chord_dsl/README.md) — typed
     builder syntax becomes FSM inputs, a normalized chord, and finally a
     semantic editor command binding.
+15. [`15_chord_builder_guided_project`](examples/15_chord_builder_guided_project/README.md)
+    — the guided integration project combines Enums, Results, FSMs, protocols,
+    custom HTML inputs, and reactive Watches in one live chord builder.
 
 The sequence should grow only when each new example teaches one additional idea
 without requiring a tour of the whole language.
