@@ -4,6 +4,14 @@ This project is the integration point for the tutorial sequence. It uses the
 canonical Workspace ChordBuilder rather than recreating a simplified copy, and
 drives it through the same HTML-action boundary used by STreuthBrowser.
 
+![The fifteen-slice STreuth tutorial sequence](TutorialSequence.svg)
+
+`TutorialSequence.st` is the source of this diagram. Running that file writes
+the checked-in SVG beside it and displays the same image in STreuthBrowser's SVG
+pane. Select the SVG tab before opening Presentation Layout to keep the live
+diagram beside the source; select HTML instead to present the interactive chord
+builder.
+
 Run it from the repository root:
 
 ```sh
@@ -13,6 +21,7 @@ Run it from the repository root:
 Expected output:
 
 ```text
+Rendered the 15-slice tutorial map in the SVG pane.
 Cmd+k
 State: Done
 Chord: Cmd+k
@@ -20,7 +29,8 @@ Inputs processed: 4
 Rendered a fresh interactive chord builder in the HTML pane.
 ```
 
-The first `Cmd+k` is printed by the canonical FSM when it enters `Done`. In
+The diagram line is produced by `TutorialSequence.st`; the following `Cmd+k` is
+printed by the canonical FSM when it enters `Done`. In
 STreuthBrowser, the final line corresponds to a fresh interactive view: choose
 one or more modifiers, optionally use Delete, then send one character.
 

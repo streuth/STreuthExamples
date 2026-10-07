@@ -13,5 +13,6 @@ let Workset := {
     "../../../STreuthWorkspace/src/projects/keymap_chord_builder/ChordBuilder.st",
     "../../../STreuthWorkspace/src/projects/keymap_chord_builder/ChordBuilderFSM.st",
     "../../../STreuthWorkspace/src/projects/keymap_chord_builder/ChordBuilderHtmlView.st",
+    "TutorialSequence.st",
     "Main.st"
 }
