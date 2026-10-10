@@ -21,12 +21,15 @@ List and run the examples from this repository:
 ./bin/run-example 01_hello_messages
 ./bin/check-examples
 ./bin/audit-standalone-examples
+./bin/check-distribution-examples
 ```
 
 `check-examples` exercises the live sibling-repository development layout.
 `audit-standalone-examples` copies every example into a disposable isolated
 repository before running it. The audit therefore fails for any example that
 still depends on `STreuthWorkspace` or another unpackaged sibling checkout.
+`check-distribution-examples` applies that isolation check to the approved
+folders in `distribution-examples.txt`; release builds use the same list.
 
 ## Standalone distribution audit
 

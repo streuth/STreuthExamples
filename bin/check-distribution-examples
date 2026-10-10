@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+# Copyright 2026 Mark Kimberly Howe. Licensed under the MIT License.
+
+set -eu
+
+repository_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+selection_file="$repository_dir/distribution-examples.txt"
+
+set --
+while IFS= read -r example_name || [ -n "$example_name" ]; do
+    case "$example_name" in
+        ""|\#*) continue ;;
+    esac
+    set -- "$@" "$example_name"
+done < "$selection_file"
+
+if [ "$#" -eq 0 ]; then
+    echo "No distribution examples are listed in $selection_file" >&2
+    exit 1
+fi
+
+exec "$repository_dir/bin/audit-standalone-examples" "$@"

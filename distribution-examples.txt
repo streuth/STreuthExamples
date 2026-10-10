@@ -1,0 +1,8 @@
+# Examples approved for standalone IDE distributions.
+01_hello_messages
+02_objects_and_blocks
+03_guarded_visitor
+04_collection_results
+05_match_and_dispatcher
+06_receiver_aware_builder
+16_guided_ide_tour

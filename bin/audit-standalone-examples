@@ -29,8 +29,29 @@ failed=0
 passed_names=""
 failed_names=""
 
-for example_dir in "$repository_dir"/examples/*; do
-    [ -d "$example_dir" ] || continue
+if [ "$#" -eq 0 ]; then
+    set -- "$repository_dir"/examples/*
+else
+    requested_examples=""
+    for example_name in "$@"; do
+        case "$example_name" in
+            ""|*[!A-Za-z0-9_-]*)
+                echo "Invalid example name: $example_name" >&2
+                exit 2
+                ;;
+        esac
+        requested_examples="${requested_examples}${requested_examples:+ }$repository_dir/examples/$example_name"
+    done
+    # Example directory names are restricted by run-example to one path segment.
+    # shellcheck disable=SC2086
+    set -- $requested_examples
+fi
+
+for example_dir in "$@"; do
+    [ -d "$example_dir" ] || {
+        echo "Unknown example: $(basename "$example_dir")" >&2
+        exit 2
+    }
     example_name=$(basename "$example_dir")
     isolated_example="$isolated_examples/$example_name"
     output_file="$audit_root/$example_name.log"
