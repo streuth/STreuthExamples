@@ -1,0 +1,85 @@
+#!/usr/bin/env sh
+# Copyright 2026 Mark Kimberly Howe. Licensed under the MIT License.
+
+set -eu
+
+repository_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+selection_file="$repository_dir/distribution-examples.txt"
+catalog_file="$repository_dir/distribution-catalog.tsv"
+package_dir="$repository_dir/build/example-packages"
+stage_dir=$(mktemp -d "${TMPDIR:-/tmp}/streuth-example-packages.XXXXXX")
+trap 'rm -rf "$stage_dir"' EXIT HUP INT TERM
+
+"$repository_dir/bin/check-distribution-examples"
+
+rm -rf "$package_dir"
+mkdir -p "$package_dir"
+
+while IFS= read -r example_name || [ -n "$example_name" ]; do
+    case "$example_name" in
+        ""|\#*) continue ;;
+    esac
+
+    catalog_row=$(awk -F '\t' -v wanted="$example_name" '
+        $1 == wanted { count += 1; row = $0 }
+        END {
+            if (count != 1) exit 1
+            print row
+        }
+    ' "$catalog_file") || {
+        echo "Expected exactly one catalog row for $example_name" >&2
+        exit 1
+    }
+
+    version=$(printf '%s\n' "$catalog_row" | cut -f2)
+    minimum_ide_version=$(printf '%s\n' "$catalog_row" | cut -f3)
+    entry_workset=$(printf '%s\n' "$catalog_row" | cut -f4)
+    entry_source=$(printf '%s\n' "$catalog_row" | cut -f5)
+    title=$(printf '%s\n' "$catalog_row" | cut -f6-)
+
+    if ! printf '%s\n' "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9.-]+)?$'; then
+        echo "Invalid example version for $example_name: $version" >&2
+        exit 1
+    fi
+    if ! printf '%s\n' "$minimum_ide_version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9.-]+)?$'; then
+        echo "Invalid minimum IDE version for $example_name: $minimum_ide_version" >&2
+        exit 1
+    fi
+    for entry_path in "$entry_workset" "$entry_source"; do
+        case "$entry_path" in
+            ""|/*|*..*|*\\*)
+                echo "Invalid entry path for $example_name: $entry_path" >&2
+                exit 1
+                ;;
+        esac
+    done
+
+    source_dir="$repository_dir/examples/$example_name"
+    packaged_root="$stage_dir/$example_name"
+    rm -rf "$packaged_root"
+    cp -R "$source_dir" "$packaged_root"
+    find "$packaged_root" -name .workset.tsv -type f -delete
+    find "$packaged_root" -name .DS_Store -type f -delete
+
+    if [ ! -f "$packaged_root/$entry_workset" ] || [ ! -f "$packaged_root/$entry_source" ]; then
+        echo "Catalog entry files do not exist for $example_name" >&2
+        exit 1
+    fi
+
+    printf '%s\n' \
+        "formatVersion=1" \
+        "id=$example_name" \
+        "version=$version" \
+        "minimumIdeVersion=$minimum_ide_version" \
+        "entryWorkset=$entry_workset" \
+        "entrySource=$entry_source" \
+        "title=$title" \
+        > "$packaged_root/.streuth-example.properties"
+
+    archive="$package_dir/$example_name-$version.zip"
+    (cd "$stage_dir" && zip -qr "$archive" "$example_name")
+    printf 'Packaged %s\n' "$archive"
+done < "$selection_file"
+
+(cd "$package_dir" && shasum -a 256 ./*.zip > SHA256SUMS)
+"$repository_dir/bin/check-example-packages"

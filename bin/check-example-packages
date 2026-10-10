@@ -1,0 +1,76 @@
+#!/usr/bin/env sh
+# Copyright 2026 Mark Kimberly Howe. Licensed under the MIT License.
+
+set -eu
+
+repository_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+package_dir="$repository_dir/build/example-packages"
+
+if [ -n "${STREUTH_JAR:-}" ]; then
+    runtime_jar=$STREUTH_JAR
+elif [ -f "$repository_dir/../STreuth/out/artifacts/STreuth_jar/STreuth.jar" ]; then
+    runtime_jar="$repository_dir/../STreuth/out/artifacts/STreuth_jar/STreuth.jar"
+elif [ -f "$repository_dir/../STreuthBrowser/build/install/STreuthBrowser/lib/STreuth.jar" ]; then
+    runtime_jar="$repository_dir/../STreuthBrowser/build/install/STreuthBrowser/lib/STreuth.jar"
+else
+    echo "STreuth.jar was not found." >&2
+    exit 1
+fi
+
+if [ ! -f "$package_dir/SHA256SUMS" ]; then
+    echo "Package checksums were not found: $package_dir/SHA256SUMS" >&2
+    exit 1
+fi
+
+(cd "$package_dir" && shasum -a 256 -c SHA256SUMS)
+
+check_root=$(mktemp -d "${TMPDIR:-/tmp}/streuth-example-check.XXXXXX")
+trap 'rm -rf "$check_root"' EXIT HUP INT TERM
+
+checked=0
+for archive in "$package_dir"/*.zip; do
+    [ -f "$archive" ] || continue
+    archive_name=$(basename "$archive" .zip)
+    destination="$check_root/$archive_name"
+    mkdir -p "$destination"
+    unzip -q "$archive" -d "$destination"
+
+    root_count=$(find "$destination" -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')
+    if [ "$root_count" -ne 1 ]; then
+        echo "Example package must contain exactly one root directory: $archive" >&2
+        exit 1
+    fi
+    packaged_root=$(find "$destination" -mindepth 1 -maxdepth 1 -type d | head -n 1)
+    manifest="$packaged_root/.streuth-example.properties"
+    if [ ! -f "$manifest" ]; then
+        echo "Example package has no manifest: $archive" >&2
+        exit 1
+    fi
+
+    format_version=$(sed -n 's/^formatVersion=//p' "$manifest")
+    package_id=$(sed -n 's/^id=//p' "$manifest")
+    package_version=$(sed -n 's/^version=//p' "$manifest")
+    entry_workset=$(sed -n 's/^entryWorkset=//p' "$manifest")
+    entry_source=$(sed -n 's/^entrySource=//p' "$manifest")
+    if [ "$format_version" != "1" ] \
+            || [ "$(basename "$packaged_root")" != "$package_id" ] \
+            || [ "$archive_name" != "$package_id-$package_version" ] \
+            || [ -z "$entry_workset" ] \
+            || [ ! -f "$packaged_root/$entry_workset" ] \
+            || [ -z "$entry_source" ] \
+            || [ ! -f "$packaged_root/$entry_source" ]; then
+        echo "Example package manifest does not match its archive: $archive" >&2
+        exit 1
+    fi
+
+    java -cp "$runtime_jar" cli.STreuthCli run "$packaged_root/$entry_source" >/dev/null
+    printf 'PASS %s\n' "$(basename "$archive")"
+    checked=$((checked + 1))
+done
+
+if [ "$checked" -eq 0 ]; then
+    echo "No example packages were found in $package_dir" >&2
+    exit 1
+fi
+
+printf 'Verified example packages: %s\n' "$checked"

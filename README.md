@@ -22,6 +22,7 @@ List and run the examples from this repository:
 ./bin/check-examples
 ./bin/audit-standalone-examples
 ./bin/check-distribution-examples
+./bin/package-distribution-examples
 ```
 
 `check-examples` exercises the live sibling-repository development layout.
@@ -30,6 +31,11 @@ repository before running it. The audit therefore fails for any example that
 still depends on `STreuthWorkspace` or another unpackaged sibling checkout.
 `check-distribution-examples` applies that isolation check to the approved
 folders in `distribution-examples.txt`; release builds use the same list.
+`package-distribution-examples` validates that set, creates one versioned ZIP
+per example under `build/example-packages`, writes `SHA256SUMS`, and then
+unpacks and executes every archive. Package metadata comes from
+`distribution-catalog.tsv` and is embedded as
+`.streuth-example.properties` in each example root.
 
 ## Standalone distribution audit
 
