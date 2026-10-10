@@ -20,7 +20,30 @@ List and run the examples from this repository:
 ./bin/list-examples
 ./bin/run-example 01_hello_messages
 ./bin/check-examples
+./bin/audit-standalone-examples
 ```
+
+`check-examples` exercises the live sibling-repository development layout.
+`audit-standalone-examples` copies every example into a disposable isolated
+repository before running it. The audit therefore fails for any example that
+still depends on `STreuthWorkspace` or another unpackaged sibling checkout.
+
+## Standalone distribution audit
+
+The current standalone set is:
+
+- `01_hello_messages`
+- `02_objects_and_blocks`
+- `03_guarded_visitor`
+- `04_collection_results`
+- `05_match_and_dispatcher`
+- `06_receiver_aware_builder`
+- `16_guided_ide_tour`
+
+Tutorials 07 through 15 currently use HTML, FSM, or keymap sources from the
+sibling `STreuthWorkspace` checkout. They remain valid in the development
+layout but must not be published as standalone downloads until those
+dependencies are promoted or packaged and the isolation audit passes.
 
 In STreuthBrowser, open the `.streuth-workset.st` inside an example directory.
 Each example is an independent workset, so loading one does not execute the

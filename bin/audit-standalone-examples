@@ -1,0 +1,66 @@
+#!/usr/bin/env sh
+# Copyright 2026 Mark Kimberly Howe. Licensed under the MIT License.
+
+set -u
+
+repository_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+
+if [ -n "${STREUTH_JAR:-}" ]; then
+    runtime_jar=$STREUTH_JAR
+elif [ -f "$repository_dir/../STreuth/out/artifacts/STreuth_jar/STreuth.jar" ]; then
+    runtime_jar="$repository_dir/../STreuth/out/artifacts/STreuth_jar/STreuth.jar"
+elif [ -f "$repository_dir/../STreuthBrowser/build/install/STreuthBrowser/lib/STreuth.jar" ]; then
+    runtime_jar="$repository_dir/../STreuthBrowser/build/install/STreuthBrowser/lib/STreuth.jar"
+else
+    echo "STreuth.jar was not found." >&2
+    echo "Build STreuth beside this repository or set STREUTH_JAR." >&2
+    exit 1
+fi
+
+audit_root=$(mktemp -d "${TMPDIR:-/tmp}/streuth-examples-standalone.XXXXXX")
+trap 'rm -rf "$audit_root"' EXIT HUP INT TERM
+
+isolated_repository="$audit_root/repository"
+isolated_examples="$isolated_repository/examples"
+mkdir -p "$isolated_examples"
+
+passed=0
+failed=0
+passed_names=""
+failed_names=""
+
+for example_dir in "$repository_dir"/examples/*; do
+    [ -d "$example_dir" ] || continue
+    example_name=$(basename "$example_dir")
+    isolated_example="$isolated_examples/$example_name"
+    output_file="$audit_root/$example_name.log"
+
+    cp -R "$example_dir" "$isolated_example"
+    find "$isolated_example" -name .workset.tsv -type f -delete
+    find "$isolated_example" -name .DS_Store -type f -delete
+
+    printf '== %s ==\n' "$example_name"
+    if java -cp "$runtime_jar" cli.STreuthCli run \
+            "$isolated_example/Main.st" >"$output_file" 2>&1; then
+        echo "PASS"
+        passed=$((passed + 1))
+        passed_names="${passed_names}${passed_names:+ }$example_name"
+    else
+        echo "FAIL"
+        sed -n '1,8p' "$output_file"
+        failed=$((failed + 1))
+        failed_names="${failed_names}${failed_names:+ }$example_name"
+    fi
+done
+
+printf '\nStandalone examples: %s\n' "$passed"
+for example_name in $passed_names; do
+    printf '  PASS %s\n' "$example_name"
+done
+
+printf '\nNon-standalone examples: %s\n' "$failed"
+for example_name in $failed_names; do
+    printf '  FAIL %s\n' "$example_name"
+done
+
+[ "$failed" -eq 0 ]
