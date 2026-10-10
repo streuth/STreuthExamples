@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: streuth/STreuth
-          ref: 289c50de5e79e763f03422967250c5086dc19493
+          ref: d2774f28a097df92bb0e4470449acb88d22e23f6
           path: STreuth
           ssh-key: ${{ secrets.STREUTH_READ_KEY }}
           persist-credentials: false
