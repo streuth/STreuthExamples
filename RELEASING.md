@@ -5,6 +5,11 @@ STreuth documentation © 2026 Mark Kimberly Howe, licensed under CC BY-SA 4.0.
 The **Example packages** GitHub Actions workflow creates a reviewed draft
 release. It does not publish automatically.
 
+The `STREUTH_READ_KEY` Actions secret must contain the private half of a
+read-only deploy key registered with the private `streuth/STreuth` repository.
+This gives the public examples workflow access to the pinned runtime source
+without granting write access to either repository.
+
 Before dispatching the workflow:
 
 1. Run `./bin/audit-standalone-examples` and review every failure.

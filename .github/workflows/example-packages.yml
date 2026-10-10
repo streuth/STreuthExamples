@@ -24,6 +24,8 @@ jobs:
           repository: streuth/STreuth
           ref: 289c50de5e79e763f03422967250c5086dc19493
           path: STreuth
+          ssh-key: ${{ secrets.STREUTH_READ_KEY }}
+          persist-credentials: false
 
       - name: Set up Java 21
         uses: actions/setup-java@v5
