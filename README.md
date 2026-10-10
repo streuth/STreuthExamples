@@ -32,8 +32,8 @@ still depends on `STreuthWorkspace` or another unpackaged sibling checkout.
 `check-distribution-examples` applies that isolation check to the approved
 folders in `distribution-examples.txt`; release builds use the same list.
 `package-distribution-examples` validates that set, creates one versioned ZIP
-per example under `build/example-packages`, writes `SHA256SUMS`, and then
-unpacks and executes every archive. Package metadata comes from
+per example under `build/example-packages`, writes `SHA256SUMS`, copies the
+catalog snapshot, and then unpacks and executes every archive. Package metadata comes from
 `distribution-catalog.tsv` and is embedded as
 `.streuth-example.properties` in each example root.
 
@@ -120,6 +120,9 @@ Start experimental work in your own `STreuthWorkspace`, then propose a focused,
 runnable lesson here through a pull request. The
 [four-repository, three-layer collaboration model](https://github.com/streuth/STreuth/blob/master/doc/COLLABORATION_MODEL.md)
 describes the repository roles, promotion path, and core review boundary.
+
+Release maintainers should follow
+[Preparing a STreuth Examples release](RELEASING.md).
 
 ## Example standard
 

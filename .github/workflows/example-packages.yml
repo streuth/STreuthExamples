@@ -1,0 +1,113 @@
+name: Example packages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    name: Verify and package examples
+    runs-on: ubuntu-24.04
+    outputs:
+      release_version: ${{ steps.version.outputs.release_version }}
+    steps:
+      - name: Check out STreuthExamples
+        uses: actions/checkout@v7
+        with:
+          path: STreuthExamples
+
+      - name: Check out pinned STreuth
+        uses: actions/checkout@v7
+        with:
+          repository: streuth/STreuth
+          ref: 289c50de5e79e763f03422967250c5086dc19493
+          path: STreuth
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Determine package release version
+        id: version
+        working-directory: STreuthExamples
+        shell: bash
+        run: |
+          versions=$(awk -F '\t' '!/^#/ && NF { print $2 }' distribution-catalog.tsv | sort -u)
+          version_count=$(printf '%s\n' "$versions" | sed '/^$/d' | wc -l)
+          if [[ "$version_count" -ne 1 ]]; then
+            echo "Every distribution example must have the same release version." >&2
+            exit 1
+          fi
+          release_version=$(printf '%s\n' "$versions" | sed -n '1p')
+          if [[ ! "$release_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9.-]+)?$ ]]; then
+            echo "Invalid release version: $release_version" >&2
+            exit 2
+          fi
+          echo "release_version=$release_version" >> "$GITHUB_OUTPUT"
+
+      - name: Test pinned STreuth runtime
+        working-directory: STreuth
+        run: ./test.sh
+
+      - name: Build pinned STreuth CLI jar
+        working-directory: STreuth
+        run: |
+          mkdir -p out/artifacts/STreuth_jar
+          jar --create \
+            --file out/artifacts/STreuth_jar/STreuth.jar \
+            --main-class cli.STreuthCli \
+            -C out/production/STreuth .
+
+      - name: Build and verify example packages
+        working-directory: STreuthExamples
+        run: ./bin/package-distribution-examples
+
+      - name: Upload verified packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: STreuthExamples-${{ steps.version.outputs.release_version }}
+          path: STreuthExamples/build/example-packages/*
+          if-no-files-found: error
+
+  draft-release:
+    name: Create draft release
+    needs: package
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Download verified packages
+        uses: actions/download-artifact@v4
+        with:
+          name: STreuthExamples-${{ needs.package.outputs.release_version }}
+          path: release-assets
+
+      - name: Create reviewed draft release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ needs.package.outputs.release_version }}
+        run: |
+          release_tag="examples-v$RELEASE_VERSION"
+          if gh release view "$release_tag" >/dev/null 2>&1; then
+            echo "Release already exists: $release_tag" >&2
+            exit 1
+          fi
+          printf '%s\n' \
+            "Verified standalone STreuth example packages." \
+            "" \
+            "Each ZIP is immutable managed material: run it in place or copy it into a writable Workspace." \
+            "This draft must be reviewed before publication." \
+            > release-notes.md
+          gh release create "$release_tag" \
+            release-assets/*.zip \
+            release-assets/SHA256SUMS \
+            release-assets/distribution-catalog.tsv \
+            --draft \
+            --target "$GITHUB_SHA" \
+            --title "STreuth Examples $RELEASE_VERSION" \
+            --notes-file release-notes.md
