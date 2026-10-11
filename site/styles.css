@@ -60,6 +60,12 @@ main, footer { width: min(72rem, calc(100% - 2.5rem)); margin-inline: auto; }
 .requirements { margin-top: 1.25rem; padding: 1rem 1.1rem; border-left: 4px solid var(--accent); background: rgba(255, 253, 248, 0.7); }
 .requirements p { margin: 0; }
 .requirements p + p { margin-top: 0.55rem; }
+.first-run { display: grid; grid-template-columns: 1fr 1.15fr; gap: 2rem; align-items: start; margin-top: 2rem; padding: 1.4rem; border: 1px solid var(--line); border-radius: 0.45rem; background: var(--card); }
+.first-run h3 { margin: 0; font: 700 1.45rem/1.12 Georgia, serif; }
+.first-run ol { margin: 1rem 0 0; padding-left: 1.4rem; }
+.first-run li + li { margin-top: 0.6rem; }
+.first-run pre { margin: 0; padding: 1rem; overflow-x: auto; border-radius: 0.35rem; background: #211c18; color: #fffaf0; white-space: pre-wrap; }
+.first-run pre code { padding: 0; background: transparent; }
 
 .start {
   display: grid;
@@ -100,6 +106,7 @@ footer p { margin: 0; }
   .hero { padding: 4.25rem 0; }
   .start { grid-template-columns: 1fr; }
   .platform-grid { grid-template-columns: 1fr; }
+  .first-run { grid-template-columns: 1fr; }
   .managed-note { grid-column: 1; }
   .section-heading, footer { align-items: flex-start; flex-direction: column; }
 }

@@ -54,6 +54,20 @@
         <p><strong>Requirement:</strong> a <a href="https://adoptium.net/temurin/releases/?version=21&amp;package=jre">Java 21 JRE</a> or newer matching the archive's architecture. JavaFX is included. A JDK is needed only when building the STreuth runtime or IDE from source.</p>
         <p>The Windows x64 archive has also been manually verified on Windows ARM64 through x64 emulation. <a href="https://github.com/streuth/STreuthExamples/releases/download/ide-v0.1.0/SHA256SUMS">Checksums</a> · <a href="https://github.com/streuth/STreuthExamples/releases/tag/ide-v0.1.0">Release notes</a></p>
       </div>
+      <div class="first-run">
+        <div>
+          <p class="eyebrow">First run</p>
+          <h3>Open the guided tour workset</h3>
+          <ol>
+            <li>In the IDE's <strong>Tutorial</strong> root, expand <code>16_guided_ide_tour</code>.</li>
+            <li>Open <code>.streuth-workset.st</code> and run the workset.</li>
+            <li>Do not run <code>Main.st</code> by itself; the workset loads its library and application sources first.</li>
+          </ol>
+        </div>
+        <pre><code># Hello, PolyGlot!
+
+The workset loaded a library, an application object, and this live preview.</code></pre>
+      </div>
     </section>
 
     <section class="start" aria-labelledby="start-title">
