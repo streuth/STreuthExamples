@@ -52,7 +52,9 @@ for (const marker of [
   "STreuthBrowser-0.1.0-windows.zip",
   "Java 21 JRE",
   "16_guided_ide_tour",
-  "Do not run <code>Main.st</code> by itself"
+  "Right-click the <code>16_guided_ide_tour</code> folder itself",
+  "Run &gt; Run Current File",
+  "Do not open and run <code>Main.st</code> by itself"
 ]) {
   if (!page.includes(marker)) throw new Error(`Download page is missing ${marker}.`);
 }
