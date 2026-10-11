@@ -58,11 +58,16 @@ jobs:
       - name: Build pinned STreuth CLI jar
         working-directory: STreuth
         run: |
+          cp -R resources/. out/production/STreuth/
           mkdir -p out/artifacts/STreuth_jar
           jar --create \
             --file out/artifacts/STreuth_jar/STreuth.jar \
             --main-class cli.STreuthCli \
             -C out/production/STreuth .
+          jar tf out/artifacts/STreuth_jar/STreuth.jar \
+            | grep -Fx symbols/streuth-definitions.tsv
+          jar tf out/artifacts/STreuth_jar/STreuth.jar \
+            | grep -Fx stdlib/.streuth-workset.st
 
       - name: Build and verify example packages
         working-directory: STreuthExamples
