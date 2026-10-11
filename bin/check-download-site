@@ -1,0 +1,49 @@
+#!/usr/bin/env sh
+# Copyright 2026 Mark Kimberly Howe. Licensed under the MIT License.
+
+set -eu
+
+repository_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+site_dir=${1:-"$repository_dir/build/download-site"}
+
+for required_file in index.html favicon.svg styles.css catalog.mjs distribution-catalog.tsv .nojekyll; do
+    if [ ! -f "$site_dir/$required_file" ]; then
+        echo "Download site is missing $required_file" >&2
+        exit 1
+    fi
+done
+
+cmp "$repository_dir/distribution-catalog.tsv" "$site_dir/distribution-catalog.tsv"
+
+node --input-type=module - "$repository_dir" "$site_dir" <<'NODE'
+import fs from "node:fs";
+import path from "node:path";
+import process from "node:process";
+import {pathToFileURL} from "node:url";
+
+const [repositoryDir, siteDir] = process.argv.slice(2);
+const moduleUrl = pathToFileURL(path.join(siteDir, "catalog.mjs"));
+const {downloadUrl, parseCatalog, releaseTag} = await import(moduleUrl);
+const catalog = fs.readFileSync(path.join(siteDir, "distribution-catalog.tsv"), "utf8");
+const examples = parseCatalog(catalog);
+const selected = fs.readFileSync(path.join(repositoryDir, "distribution-examples.txt"), "utf8")
+  .split(/\r?\n/)
+  .map(line => line.trim())
+  .filter(line => line && !line.startsWith("#"));
+
+if (JSON.stringify(examples.map(example => example.id)) !== JSON.stringify(selected)) {
+  throw new Error("The download catalog does not match the approved distribution list.");
+}
+
+for (const example of examples) {
+  const expected = `https://github.com/streuth/STreuthExamples/releases/download/${releaseTag(example.version)}/${example.id}-${example.version}.zip`;
+  if (downloadUrl(example) !== expected) throw new Error(`Unexpected download URL for ${example.id}.`);
+}
+
+const page = fs.readFileSync(path.join(siteDir, "index.html"), "utf8");
+for (const marker of ["catalog.mjs", "example-list", "Copy", "Workspace"]) {
+  if (!page.includes(marker)) throw new Error(`Download page is missing ${marker}.`);
+}
+
+console.log(`Verified download catalog: ${examples.length} examples at ${releaseTag(examples[0].version)}`);
+NODE

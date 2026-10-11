@@ -1,0 +1,59 @@
+<!doctype html>
+<!-- Copyright 2026 Mark Kimberly Howe. Licensed under the MIT License. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Official downloadable examples for learning STreuth in STreuthBrowser.">
+  <title>STreuth Examples</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="catalog.mjs"></script>
+</head>
+<body>
+  <header class="masthead">
+    <nav aria-label="Primary">
+      <a class="wordmark" href="https://github.com/streuth/STreuthExamples">STreuthExamples</a>
+      <a href="https://github.com/streuth/STreuthExamples/releases">All releases</a>
+    </nav>
+    <div class="hero">
+      <p class="eyebrow">Official example downloads</p>
+      <h1>Learn STreuth one runnable idea at a time.</h1>
+      <p class="lede">Download a verified lesson, open its workset in STreuthBrowser, and explore a small working program.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="start" aria-labelledby="start-title">
+      <div>
+        <p class="eyebrow">A clean start</p>
+        <h2 id="start-title">From download to running example</h2>
+      </div>
+      <ol>
+        <li><strong>Download</strong> one example ZIP below and expand it.</li>
+        <li><strong>Open</strong> its <code>.streuth-workset.st</code> in STreuthBrowser.</li>
+        <li><strong>Copy</strong> it into your Workspace before changing it.</li>
+      </ol>
+      <p class="managed-note">Official examples are managed reference material. Your Workspace copy is yours; future downloads do not merge over your edits.</p>
+    </section>
+
+    <section class="catalog" aria-labelledby="catalog-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Verified collection</p>
+          <h2 id="catalog-title">Standalone examples</h2>
+        </div>
+        <p id="catalog-version" class="version" aria-live="polite"></p>
+      </div>
+      <p id="catalog-status" class="status" role="status">Loading the example catalog…</p>
+      <div id="example-list" class="example-grid"></div>
+      <noscript><p class="status error">JavaScript is required to read the published example catalog. You can download the same files from GitHub Releases.</p></noscript>
+    </section>
+  </main>
+
+  <footer>
+    <p>STreuth™, STreuthBrowser™, and STreuthIDE™ are trademarks of Mark Kimberly Howe.</p>
+    <p><a href="https://github.com/streuth/STreuthExamples">Source and lesson notes</a></p>
+  </footer>
+</body>
+</html>

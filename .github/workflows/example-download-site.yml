@@ -1,0 +1,71 @@
+# Copyright 2026 Mark Kimberly Howe. Licensed under the MIT License.
+
+name: Example download site
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build download catalog
+    if: startsWith(github.event.release.tag_name, 'examples-v')
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out STreuthExamples
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js 24
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+
+      - name: Match catalog to published release
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          versions=$(awk -F '\t' '!/^#/ && NF { print $2 }' distribution-catalog.tsv | sort -u)
+          version_count=$(printf '%s\n' "$versions" | sed '/^$/d' | wc -l)
+          if [[ "$version_count" -ne 1 ]]; then
+            echo "Every distribution example must have the same release version." >&2
+            exit 1
+          fi
+          expected_tag="examples-v$(printf '%s\n' "$versions" | sed -n '1p')"
+          if [[ "$RELEASE_TAG" != "$expected_tag" ]]; then
+            echo "Published $RELEASE_TAG, but the catalog expects $expected_tag." >&2
+            exit 2
+          fi
+
+      - name: Build and verify download site
+        run: ./bin/build-download-site
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: build/download-site
+
+  deploy:
+    name: Deploy download catalog
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

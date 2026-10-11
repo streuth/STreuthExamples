@@ -23,6 +23,7 @@ List and run the examples from this repository:
 ./bin/audit-standalone-examples
 ./bin/check-distribution-examples
 ./bin/package-distribution-examples
+./bin/build-download-site
 ```
 
 `check-examples` exercises the live sibling-repository development layout.
@@ -36,6 +37,8 @@ per example under `build/example-packages`, writes `SHA256SUMS`, copies the
 catalog snapshot, and then unpacks and executes every archive. Package metadata comes from
 `distribution-catalog.tsv` and is embedded as
 `.streuth-example.properties` in each example root.
+`build-download-site` creates and verifies the GitHub Pages download catalog
+from that same TSV file; it does not maintain a second example list.
 
 ## Standalone distribution audit
 

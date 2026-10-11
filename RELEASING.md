@@ -33,3 +33,8 @@ Before publishing the draft:
 - Confirm the archive manifest matches its filename and catalog row.
 - Keep the release as a draft if the corresponding IDE compatibility claim has
   not been exercised.
+
+Publishing an `examples-v<version>` release triggers the **Example download
+site** workflow. That workflow requires the release tag to match the single
+version in `distribution-catalog.tsv`, builds the site from the catalog, and
+deploys it through GitHub Pages. A draft release never changes the public site.

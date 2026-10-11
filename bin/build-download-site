@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+# Copyright 2026 Mark Kimberly Howe. Licensed under the MIT License.
+
+set -eu
+
+repository_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+site_dir="$repository_dir/build/download-site"
+
+rm -rf "$site_dir"
+mkdir -p "$site_dir"
+cp "$repository_dir/site/index.html" "$site_dir/index.html"
+cp "$repository_dir/site/favicon.svg" "$site_dir/favicon.svg"
+cp "$repository_dir/site/styles.css" "$site_dir/styles.css"
+cp "$repository_dir/site/catalog.mjs" "$site_dir/catalog.mjs"
+cp "$repository_dir/distribution-catalog.tsv" "$site_dir/distribution-catalog.tsv"
+: > "$site_dir/.nojekyll"
+
+"$repository_dir/bin/check-download-site" "$site_dir"
+printf 'Built example download site: %s\n' "$site_dir"
