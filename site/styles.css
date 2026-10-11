@@ -50,6 +50,17 @@ nav a { color: inherit; text-decoration: none; }
 
 main, footer { width: min(72rem, calc(100% - 2.5rem)); margin-inline: auto; }
 
+.ide-download { padding: 4.5rem 0; border-bottom: 1px solid var(--line); }
+.section-intro { max-width: 50rem; margin: -0.5rem 0 2rem; font-size: 1.08rem; }
+.platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.platform-card { display: flex; flex-direction: column; padding: 1.4rem; border: 1px solid var(--line); border-radius: 0.45rem; background: var(--card); }
+.platform-card h3 { margin: 0; font: 700 1.45rem/1.12 Georgia, serif; }
+.platform-card p { margin: 0.8rem 0 1.35rem; color: var(--muted); }
+.platform-card .download { align-self: flex-start; margin-top: auto; }
+.requirements { margin-top: 1.25rem; padding: 1rem 1.1rem; border-left: 4px solid var(--accent); background: rgba(255, 253, 248, 0.7); }
+.requirements p { margin: 0; }
+.requirements p + p { margin-top: 0.55rem; }
+
 .start {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
@@ -88,6 +99,7 @@ footer p { margin: 0; }
 @media (max-width: 44rem) {
   .hero { padding: 4.25rem 0; }
   .start { grid-template-columns: 1fr; }
+  .platform-grid { grid-template-columns: 1fr; }
   .managed-note { grid-column: 1; }
   .section-heading, footer { align-items: flex-start; flex-direction: column; }
 }

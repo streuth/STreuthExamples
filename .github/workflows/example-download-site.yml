@@ -5,6 +5,7 @@ name: Example download site
 on:
   release:
     types: [published]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -16,7 +17,7 @@ concurrency:
 jobs:
   build:
     name: Build download catalog
-    if: startsWith(github.event.release.tag_name, 'examples-v')
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.release.tag_name, 'examples-v')
     runs-on: ubuntu-24.04
     steps:
       - name: Check out STreuthExamples
@@ -39,7 +40,7 @@ jobs:
             exit 1
           fi
           expected_tag="examples-v$(printf '%s\n' "$versions" | sed -n '1p')"
-          if [[ "$RELEASE_TAG" != "$expected_tag" ]]; then
+          if [[ -n "$RELEASE_TAG" && "$RELEASE_TAG" != "$expected_tag" ]]; then
             echo "Published $RELEASE_TAG, but the catalog expects $expected_tag." >&2
             exit 2
           fi

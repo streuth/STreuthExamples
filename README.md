@@ -10,7 +10,8 @@ run path, and output a new reader can check.
 
 Requirements:
 
-- Java 21 or newer.
+- A Java 21 JRE or newer. Running or modifying these examples does not require
+  a JDK; maintainers need one only when building the STreuth runtime or IDE.
 - A current STreuth runtime. The runner finds a sibling `../STreuth` checkout
   automatically, or you can set `STREUTH_JAR` to a built `STreuth.jar`.
 

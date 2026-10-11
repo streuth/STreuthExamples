@@ -41,7 +41,17 @@ for (const example of examples) {
 }
 
 const page = fs.readFileSync(path.join(siteDir, "index.html"), "utf8");
-for (const marker of ["catalog.mjs", "example-list", "Copy", "Workspace"]) {
+for (const marker of [
+  "catalog.mjs",
+  "example-list",
+  "Copy",
+  "Workspace",
+  "Download STreuthBrowser",
+  "STreuthBrowser-0.1.0-macos.zip",
+  "STreuthBrowser-0.1.0-ubuntu-24.04.zip",
+  "STreuthBrowser-0.1.0-windows.zip",
+  "Java 21 JRE"
+]) {
   if (!page.includes(marker)) throw new Error(`Download page is missing ${marker}.`);
 }
 
