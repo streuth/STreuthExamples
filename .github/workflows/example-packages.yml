@@ -74,7 +74,7 @@ jobs:
         run: ./bin/package-distribution-examples
 
       - name: Upload verified packages
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: STreuthExamples-${{ steps.version.outputs.release_version }}
           path: STreuthExamples/build/example-packages/*
@@ -88,7 +88,7 @@ jobs:
       contents: write
     steps:
       - name: Download verified packages
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: STreuthExamples-${{ needs.package.outputs.release_version }}
           path: release-assets
@@ -100,7 +100,7 @@ jobs:
           RELEASE_VERSION: ${{ needs.package.outputs.release_version }}
         run: |
           release_tag="examples-v$RELEASE_VERSION"
-          if gh release view "$release_tag" >/dev/null 2>&1; then
+          if gh release view "$release_tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             echo "Release already exists: $release_tag" >&2
             exit 1
           fi
@@ -110,7 +110,7 @@ jobs:
             "Each ZIP is immutable managed material: run it in place or copy it into a writable Workspace." \
             "This draft must be reviewed before publication." \
             > release-notes.md
-          gh release create "$release_tag" \
+          gh release create "$release_tag" --repo "$GITHUB_REPOSITORY" \
             release-assets/*.zip \
             release-assets/SHA256SUMS \
             release-assets/distribution-catalog.tsv \
