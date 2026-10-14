@@ -89,49 +89,49 @@ let diagram := Svg width: 1200
     height: 800
     viewBox: {0, 0, 1200, 800}
     draw: [
-        self background: "#f8fafc"
+        background: "#f8fafc"
 
-        self text: "The STreuth tutorial sequence"
+        text: "The STreuth tutorial sequence"
             at: (40 -> 52)
             size: 30
             fill: "#0f172a"
             anchor: "start"
             baseline: "middle"
 
-        self text: "Each slice adds one idea; Tutorial 15 composes them into a live project."
+        text: "Each slice adds one idea; Tutorial 15 composes them into a live project."
             at: (40 -> 88)
             size: 16
             fill: "#475569"
             anchor: "start"
             baseline: "middle"
 
-        self rect: (40 -> 118) size: (18 -> 18) fill: foundations stroke: "#334155" width: 1 attrs: {("rx" -> 4)}
-        self text: "Foundations 1–3" at: (68 -> 127) size: 13 fill: "#334155" anchor: "start" baseline: "middle"
-        self rect: (245 -> 118) size: (18 -> 18) fill: composition stroke: "#334155" width: 1 attrs: {("rx" -> 4)}
-        self text: "Composition 4–7" at: (273 -> 127) size: 13 fill: "#334155" anchor: "start" baseline: "middle"
-        self rect: (465 -> 118) size: (18 -> 18) fill: interaction stroke: "#334155" width: 1 attrs: {("rx" -> 4)}
-        self text: "State + interaction 8–13" at: (493 -> 127) size: 13 fill: "#334155" anchor: "start" baseline: "middle"
-        self rect: (750 -> 118) size: (18 -> 18) fill: integration stroke: "#334155" width: 1 attrs: {("rx" -> 4)}
-        self text: "Integration 14–15" at: (778 -> 127) size: 13 fill: "#334155" anchor: "start" baseline: "middle"
+        rect: (40 -> 118) size: (18 -> 18) fill: foundations stroke: "#334155" width: 1 attrs: {("rx" -> 4)};
+        text: "Foundations 1–3" at: (68 -> 127) size: 13 fill: "#334155" anchor: "start" baseline: "middle";
+        rect: (245 -> 118) size: (18 -> 18) fill: composition stroke: "#334155" width: 1 attrs: {("rx" -> 4)};
+        text: "Composition 4–7" at: (273 -> 127) size: 13 fill: "#334155" anchor: "start" baseline: "middle";
+        rect: (465 -> 118) size: (18 -> 18) fill: interaction stroke: "#334155" width: 1 attrs: {("rx" -> 4)};
+        text: "State + interaction 8–13" at: (493 -> 127) size: 13 fill: "#334155" anchor: "start" baseline: "middle";
+        rect: (750 -> 118) size: (18 -> 18) fill: integration stroke: "#334155" width: 1 attrs: {("rx" -> 4)};
+        text: "Integration 14–15" at: (778 -> 127) size: 13 fill: "#334155" anchor: "start" baseline: "middle";
 
-        self raw: "<defs><marker id=\"sequence-arrow\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#64748b\"/></marker></defs>"
+        raw: "<defs><marker id=\"sequence-arrow\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#64748b\"/></marker></defs>"
 
         // The cards follow a snake so the complete story remains legible in
         // the half-width SVG pane used by Presentation Layout.
-        self line: (240 -> 230) to: (270 -> 230) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")}
-        self line: (470 -> 230) to: (500 -> 230) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")}
-        self line: (700 -> 230) to: (730 -> 230) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")}
-        self line: (930 -> 230) to: (960 -> 230) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")}
-        self line: (1060 -> 290) to: (1060 -> 400) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")}
-        self line: (960 -> 460) to: (930 -> 460) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")}
-        self line: (730 -> 460) to: (700 -> 460) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")}
-        self line: (500 -> 460) to: (470 -> 460) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")}
-        self line: (270 -> 460) to: (240 -> 460) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")}
-        self line: (140 -> 520) to: (140 -> 630) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")}
-        self line: (240 -> 690) to: (270 -> 690) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")}
-        self line: (470 -> 690) to: (500 -> 690) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")}
-        self line: (700 -> 690) to: (730 -> 690) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")}
-        self line: (930 -> 690) to: (960 -> 690) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")}
+        line: (240 -> 230) to: (270 -> 230) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
+        line: (470 -> 230) to: (500 -> 230) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
+        line: (700 -> 230) to: (730 -> 230) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
+        line: (930 -> 230) to: (960 -> 230) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
+        line: (1060 -> 290) to: (1060 -> 400) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
+        line: (960 -> 460) to: (930 -> 460) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
+        line: (730 -> 460) to: (700 -> 460) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
+        line: (500 -> 460) to: (470 -> 460) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
+        line: (270 -> 460) to: (240 -> 460) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
+        line: (140 -> 520) to: (140 -> 630) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
+        line: (240 -> 690) to: (270 -> 690) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
+        line: (470 -> 690) to: (500 -> 690) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
+        line: (700 -> 690) to: (730 -> 690) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
+        line: (930 -> 690) to: (960 -> 690) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
 
         steps each: [ step | step drawOn: self ]
     ]
