@@ -1,13 +1,47 @@
 /* Copyright 2026 Mark Kimberly Howe. Licensed under the MIT License. */
 
+html {
+  color-scheme: light;
+  background: #ffffff;
+}
+
 body {
   font-family: system-ui, sans-serif;
   margin: 2rem;
   color: #243047;
+  background: #ffffff;
 }
 
 form {
   display: grid;
   gap: 0.5rem;
   max-width: 24rem;
+}
+
+input,
+select,
+textarea {
+  box-sizing: border-box;
+  padding: 0.55rem 0.7rem;
+  color: #18202a;
+  background: #ffffff;
+  border: 1px solid #98a2b3;
+  border-radius: 0.35rem;
+  font: inherit;
+}
+
+button {
+  justify-self: start;
+  padding: 0.55rem 0.85rem;
+  color: #ffffff;
+  background: #174ea6;
+  border: 0;
+  border-radius: 0.35rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  accent-color: #174ea6;
 }
