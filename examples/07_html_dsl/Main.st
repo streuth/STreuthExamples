@@ -27,7 +27,7 @@ document
             ]
         ];
         footer: [
-            paragraph: "Built with the canonical Workspace HTML DSL."
+            paragraph: "Built with the standard-library HTML DSL."
         ]
     ]
 

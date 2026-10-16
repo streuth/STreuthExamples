@@ -51,9 +51,11 @@ The current standalone set is:
 - `04_collection_results`
 - `05_match_and_dispatcher`
 - `06_receiver_aware_builder`
+- `07_html_dsl`
+- `09_html_actions_and_forms`
 - `16_guided_ide_tour`
 
-Tutorials 07 through 15 currently use HTML, FSM, or keymap sources from the
+Tutorials 08 and 10 through 15 currently use FSM or keymap sources from the
 sibling `STreuthWorkspace` checkout. They remain valid in the development
 layout but must not be published as standalone downloads until those
 dependencies are promoted or packaged and the isolation audit passes.

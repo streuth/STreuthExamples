@@ -5,4 +5,6 @@
 04_collection_results
 05_match_and_dispatcher
 06_receiver_aware_builder
+07_html_dsl
+09_html_actions_and_forms
 16_guided_ide_tour

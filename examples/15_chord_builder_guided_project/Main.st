@@ -66,7 +66,7 @@ Object assert: (rendered contains: ">Delete</a>")
     message: "the payload-free input should retain the default action view"
 Object assert: (rendered contains: "State: Done")
     message: "the status pane should show the final FSM state"
-Object assert: (rendered contains: "Chord: Cmd+k")
+Object assert: (rendered contains: "Chord: &quot;Cmd+k&quot;")
     message: "the status pane should show the completed chord"
 
 "State: \[machine currentState name]" println

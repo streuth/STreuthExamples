@@ -24,9 +24,8 @@ Rendered tutorial 07 in the HTML pane.
 In STreuthBrowser, run the workset and select the HTML tab to see the rendered
 document. Presentation Layout can then show the source beside that HTML output.
 
-This tutorial deliberately loads the canonical HTML DSL from the sibling
-`STreuthWorkspace` checkout instead of copying it. Keep `STreuthExamples` and
-`STreuthWorkspace` beside one another under the same parent directory.
+The HTML DSL and writer are part of the STreuth standard library, so this
+tutorial runs without a sibling `STreuthWorkspace` checkout.
 
 Try adding another `section:` inside `main:`. Then put `<` or `&` in its text
 and inspect the rendered result: `HTMLWriter` escapes content while preserving
