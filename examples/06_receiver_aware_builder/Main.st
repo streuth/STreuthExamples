@@ -22,6 +22,10 @@ ArticleBuilder define: [
         self
     ]
 
+    method api of: {^List} [
+        {"title:", "paragraph:"}
+    ]
+
     method build of: {^Article} [
         article title isEmpty ifTrue: [
             self error: "An article requires a title"

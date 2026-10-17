@@ -23,6 +23,13 @@ the temporary `ArticleBuilder`. The outer `subject` variable remains lexically
 captured even though `self` has changed. The `Block on: ArticleBuilder` contract
 documents and checks the receiver expected by `compose:`.
 
+`ArticleBuilder api` supplies the IDE's completion vocabulary inside that
+receiver-aware block: `title:` and `paragraph:`. It is an advisory tooling
+boundary, not runtime visibility or a new language construct. That small
+boundary makes the DSL pleasant to author now without prematurely fixing the
+larger API-bubble design; later applications can provide evidence about what
+that boundary eventually needs to enforce.
+
 Semicolons explicitly separate adjacent receiverless keyword messages. Without
 them, neighbouring lines could be parsed as parts of one longer keyword
 selector.
