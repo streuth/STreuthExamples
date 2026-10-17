@@ -12,6 +12,13 @@ pane. Select the SVG tab before opening Presentation Layout to keep the live
 diagram beside the source; select HTML instead to present the interactive chord
 builder.
 
+The diagram deliberately keeps its structure independent of SVG: `Rectangle`,
+`Circle`, and `Segment` values describe the background, cards, badges, legend,
+and connections. Styles are attached to those Shape instances and
+`SvgShapeRenderer` maps them into the SVG DSL. Text and the arrow-marker
+definition remain in SVG because they are presentation concerns rather than
+geometry.
+
 Run it from the repository root:
 
 ```sh

@@ -20,22 +20,24 @@ TutorialStep define: [
             step
         ]
 
-    method drawOn: of: {Svg} [ canvas |
+    method drawOn:using: of: {Svg, SvgShapeRenderer} [ canvas renderer |
         let left := position x
         let top := position y
 
-        canvas rect: position
-            size: (200 -> 120)
-            fill: fill
-            stroke: "#334155"
-            width: 2
-            attrs: {("rx" -> 14)}
+        let card := Rectangle origin: position size: (200 -> 120)
+        canvas add: (renderer draw: card style: {
+            ("fill" -> fill),
+            ("stroke" -> "#334155"),
+            ("width" -> 2),
+            ("rx" -> 14)
+        } asMap)
 
-        canvas circle: ((left + 28) -> (top + 30))
-            radius: 18
-            fill: "#0f172a"
-            stroke: "#0f172a"
-            width: 1
+        let badge := Circle center: ((left + 28) -> (top + 30)) radius: 18
+        canvas add: (renderer draw: badge style: {
+            ("fill" -> "#0f172a"),
+            ("stroke" -> "#0f172a"),
+            ("width" -> 1)
+        } asMap)
 
         canvas text: number asIntegerString
             at: ((left + 28) -> (top + 30))
@@ -65,6 +67,24 @@ let composition := "#ede9fe"
 let interaction := "#dcfce7"
 let integration := "#fef3c7"
 
+let renderer := SvgShapeRenderer new
+
+let renderLegendSwatch := [ position fill |
+    let swatch := Rectangle origin: position size: (18 -> 18)
+    renderer draw: swatch style: {
+        ("fill" -> fill),
+        ("stroke" -> "#334155"),
+        ("width" -> 1),
+        ("rx" -> 4)
+    } asMap
+]
+
+let connectorStyle := {
+    ("stroke" -> "#64748b"),
+    ("width" -> 3),
+    ("marker-end" -> "url(#sequence-arrow)")
+} asMap
+
 let steps := {
     TutorialStep number: 1 title: "Messages" detail: "visible values" fill: foundations position: (40 -> 170),
     TutorialStep number: 2 title: "Objects + blocks" detail: "guarded behavior" fill: foundations position: (270 -> 170),
@@ -89,7 +109,11 @@ let diagram := Svg width: 1200
     height: 800
     viewBox: {0, 0, 1200, 800}
     draw: [
-        background: "#f8fafc"
+        add: (renderer draw: (Rectangle origin: (0 -> 0) size: (1200 -> 800)) style: {
+            ("fill" -> "#f8fafc"),
+            ("stroke" -> "#f8fafc"),
+            ("width" -> 0)
+        } asMap)
 
         text: "The STreuth tutorial sequence"
             at: (40 -> 52)
@@ -105,35 +129,39 @@ let diagram := Svg width: 1200
             anchor: "start"
             baseline: "middle"
 
-        rect: (40 -> 118) size: (18 -> 18) fill: foundations stroke: "#334155" width: 1 attrs: {("rx" -> 4)};
+        add: (renderLegendSwatch value: (40 -> 118) with: foundations);
         text: "Foundations 1–3" at: (68 -> 127) size: 13 fill: "#334155" anchor: "start" baseline: "middle";
-        rect: (245 -> 118) size: (18 -> 18) fill: composition stroke: "#334155" width: 1 attrs: {("rx" -> 4)};
+        add: (renderLegendSwatch value: (245 -> 118) with: composition);
         text: "Composition 4–7" at: (273 -> 127) size: 13 fill: "#334155" anchor: "start" baseline: "middle";
-        rect: (465 -> 118) size: (18 -> 18) fill: interaction stroke: "#334155" width: 1 attrs: {("rx" -> 4)};
+        add: (renderLegendSwatch value: (465 -> 118) with: interaction);
         text: "State + interaction 8–13" at: (493 -> 127) size: 13 fill: "#334155" anchor: "start" baseline: "middle";
-        rect: (750 -> 118) size: (18 -> 18) fill: integration stroke: "#334155" width: 1 attrs: {("rx" -> 4)};
+        add: (renderLegendSwatch value: (750 -> 118) with: integration);
         text: "Integration 14–15" at: (778 -> 127) size: 13 fill: "#334155" anchor: "start" baseline: "middle";
 
         raw: "<defs><marker id=\"sequence-arrow\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#64748b\"/></marker></defs>"
 
         // The cards follow a snake so the complete story remains legible in
         // the half-width SVG pane used by Presentation Layout.
-        line: (240 -> 230) to: (270 -> 230) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
-        line: (470 -> 230) to: (500 -> 230) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
-        line: (700 -> 230) to: (730 -> 230) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
-        line: (930 -> 230) to: (960 -> 230) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
-        line: (1060 -> 290) to: (1060 -> 400) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
-        line: (960 -> 460) to: (930 -> 460) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
-        line: (730 -> 460) to: (700 -> 460) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
-        line: (500 -> 460) to: (470 -> 460) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
-        line: (270 -> 460) to: (240 -> 460) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
-        line: (140 -> 520) to: (140 -> 630) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
-        line: (240 -> 690) to: (270 -> 690) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
-        line: (470 -> 690) to: (500 -> 690) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
-        line: (700 -> 690) to: (730 -> 690) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
-        line: (930 -> 690) to: (960 -> 690) stroke: "#64748b" width: 3 attrs: {("marker-end" -> "url(#sequence-arrow)")};
+        {
+            Segment from: (240 -> 230) to: (270 -> 230),
+            Segment from: (470 -> 230) to: (500 -> 230),
+            Segment from: (700 -> 230) to: (730 -> 230),
+            Segment from: (930 -> 230) to: (960 -> 230),
+            Segment from: (1060 -> 290) to: (1060 -> 400),
+            Segment from: (960 -> 460) to: (930 -> 460),
+            Segment from: (730 -> 460) to: (700 -> 460),
+            Segment from: (500 -> 460) to: (470 -> 460),
+            Segment from: (270 -> 460) to: (240 -> 460),
+            Segment from: (140 -> 520) to: (140 -> 630),
+            Segment from: (240 -> 690) to: (270 -> 690),
+            Segment from: (470 -> 690) to: (500 -> 690),
+            Segment from: (700 -> 690) to: (730 -> 690),
+            Segment from: (930 -> 690) to: (960 -> 690)
+        } each: [ connector |
+            add: (renderer draw: connector style: connectorStyle)
+        ]
 
-        steps each: [ step | step drawOn: self ]
+        steps each: [ step | step drawOn: self using: renderer ]
     ]
 
 // Keep the checked-in image and the live SVG pane driven by the same source.
