@@ -51,6 +51,7 @@ for (const marker of [
   "STreuthBrowser-0.1.0-ubuntu-24.04.zip",
   "STreuthBrowser-0.1.0-windows.zip",
   "Java 21 JRE",
+  "https://matrix.to/#/#streuth:matrix.org",
   "16_guided_ide_tour",
   "Right-click the <code>16_guided_ide_tour</code> folder itself",
   "Run &gt; Run Current File",
