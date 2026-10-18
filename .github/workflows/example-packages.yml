@@ -1,3 +1,5 @@
+# Copyright 2026 Mark Kimberly Howe. Licensed under the MIT License.
+
 name: Example packages
 
 on:
@@ -22,7 +24,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: streuth/STreuth
-          ref: d2774f28a097df92bb0e4470449acb88d22e23f6
+          ref: de208b832b9a05c1c9d3dbfe06443ac238892734
           path: STreuth
           ssh-key: ${{ secrets.STREUTH_READ_KEY }}
           persist-credentials: false
