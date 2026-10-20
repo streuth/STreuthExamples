@@ -6,7 +6,7 @@ set -eu
 repository_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 site_dir=${1:-"$repository_dir/build/download-site"}
 
-for required_file in index.html favicon.svg styles.css catalog.mjs distribution-catalog.tsv .nojekyll; do
+for required_file in index.html favicon.svg social-preview.png styles.css catalog.mjs distribution-catalog.tsv .nojekyll; do
     if [ ! -f "$site_dir/$required_file" ]; then
         echo "Download site is missing $required_file" >&2
         exit 1
@@ -47,6 +47,8 @@ for (const marker of [
   "Copy",
   "Workspace",
   "Download STreuthBrowser",
+  "STreuth: One Executable Idea—the Block",
+  "https://streuth.github.io/STreuthExamples/social-preview.png",
   "STreuthBrowser-0.1.1-macos.zip",
   "STreuthBrowser-0.1.1-ubuntu-24.04.zip",
   "STreuthBrowser-0.1.1-windows.zip",

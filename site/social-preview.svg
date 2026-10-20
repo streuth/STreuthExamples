@@ -1,0 +1,35 @@
+<!-- Copyright 2026 Mark Kimberly Howe. Licensed under the MIT License. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6d2718"/>
+      <stop offset="0.58" stop-color="#a54527"/>
+      <stop offset="1" stop-color="#c56d3d"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.84" cy="0.18" r="0.5">
+      <stop offset="0" stop-color="#ffcc82" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#ffcc82" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#background)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g transform="translate(58 38) scale(0.105)">
+    <rect x="32" y="32" width="960" height="960" rx="205" fill="#000000"/>
+    <g transform="translate(25 139) scale(1.1)" fill="none" stroke-linecap="butt">
+      <path d="M 434 194 H 230 C 177 194 177 339 230 339 H 389 C 455 339 455 483 400 483 H 195"
+            stroke="#9353D6" stroke-width="64"/>
+      <path d="M 434 194 H 708" stroke="#70F2D5" stroke-width="64"/>
+      <path d="M 571 194 V 507" stroke="#70F2D5" stroke-width="64"/>
+      <path d="M 184 402.5 H 108.5 V 547.5 H 184"
+            stroke="#9353D6" stroke-width="36" stroke-linejoin="miter"/>
+      <path d="M 702 130.5 H 777.5 V 274.5 H 702"
+            stroke="#70F2D5" stroke-width="36" stroke-linejoin="miter"/>
+    </g>
+  </g>
+  <text x="182" y="104" fill="#fffaf0" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800" letter-spacing="4">STREUTH</text>
+  <text x="88" y="265" fill="#fffaf0" font-family="Georgia, serif" font-size="76" font-weight="700">One executable idea:</text>
+  <text x="88" y="355" fill="#fffaf0" font-family="Georgia, serif" font-size="92" font-weight="700">the Block.</text>
+  <line x1="88" y1="420" x2="1112" y2="420" stroke="#fffaf0" stroke-opacity="0.35" stroke-width="2"/>
+  <text x="88" y="486" fill="#fffaf0" font-family="Inter, Arial, sans-serif" font-size="28">Methods · functions · callbacks · builders · DSL actions</text>
+  <text x="88" y="556" fill="#fffaf0" fill-opacity="0.82" font-family="Inter, Arial, sans-serif" font-size="22">streuth.github.io/STreuthExamples</text>
+</svg>
