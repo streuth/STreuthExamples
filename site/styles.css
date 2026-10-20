@@ -41,7 +41,8 @@ nav {
 }
 
 nav a { color: inherit; text-decoration: none; }
-.wordmark { font-weight: 800; letter-spacing: 0.02em; }
+.wordmark { display: inline-flex; align-items: center; gap: 0.75rem; font-weight: 800; letter-spacing: 0.02em; }
+.wordmark img { width: 3rem; height: 3rem; flex: none; }
 
 .hero { max-width: 54rem; padding: 6rem 0 6.5rem; }
 .hero h1 { max-width: 14ch; margin: 0; font: 800 clamp(2.7rem, 8vw, 5.9rem)/0.96 Georgia, serif; letter-spacing: -0.045em; }
