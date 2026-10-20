@@ -1,10 +1,10 @@
 # id	version	minimumIdeVersion	entryWorkset	entrySource	title
-01_hello_messages	0.1.1	0.1.0	.streuth-workset.st	Main.st	Hello Messages
-02_objects_and_blocks	0.1.1	0.1.0	.streuth-workset.st	Main.st	Objects and Blocks
-03_guarded_visitor	0.1.1	0.1.0	.streuth-workset.st	Main.st	Guarded Visitor
-04_collection_results	0.1.1	0.1.0	.streuth-workset.st	Main.st	Collection Results
-05_match_and_dispatcher	0.1.1	0.1.0	.streuth-workset.st	Main.st	Match and Dispatcher
-06_receiver_aware_builder	0.1.1	0.1.0	.streuth-workset.st	Main.st	Receiver-aware Builder
-07_html_dsl	0.1.1	0.1.0	.streuth-workset.st	Main.st	HTML DSL
-09_html_actions_and_forms	0.1.1	0.1.0	.streuth-workset.st	Main.st	HTML Actions and Forms
-16_guided_ide_tour	0.1.1	0.1.0	.streuth-workset.st	Main.st	Guided IDE Tour
+01_hello_messages	0.1.2	0.1.0	.streuth-workset.st	Main.st	Hello Messages
+02_objects_and_blocks	0.1.2	0.1.0	.streuth-workset.st	Main.st	Objects and Blocks
+03_guarded_visitor	0.1.2	0.1.0	.streuth-workset.st	Main.st	Guarded Visitor
+04_collection_results	0.1.2	0.1.0	.streuth-workset.st	Main.st	Collection Results
+05_match_and_dispatcher	0.1.2	0.1.0	.streuth-workset.st	Main.st	Match and Dispatcher
+06_receiver_aware_builder	0.1.2	0.1.0	.streuth-workset.st	Main.st	Receiver-aware Builder
+07_html_dsl	0.1.2	0.1.0	.streuth-workset.st	Main.st	HTML DSL
+09_html_actions_and_forms	0.1.2	0.1.0	.streuth-workset.st	Main.st	HTML Actions and Forms
+16_guided_ide_tour	0.1.2	0.1.0	.streuth-workset.st	Main.st	Guided IDE Tour
