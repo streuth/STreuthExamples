@@ -78,7 +78,8 @@ so the checked-in overview and STreuthBrowser's live SVG pane share one source.
    prototype, guarded fields and methods, instances, and a block passed a model
    object.
 3. [`03_guarded_visitor`](examples/03_guarded_visitor/README.md) — ordinary
-   type dispatch extended by a value that acts as a guard.
+   type dispatch extended by a value that acts as a guard, including why broad
+   fallbacks must be installed before narrower guarded overloads.
 4. [`04_collection_results`](examples/04_collection_results/README.md) —
    collection queries that preserve whether they found none, one, or many
    values.
