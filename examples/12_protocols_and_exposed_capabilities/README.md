@@ -15,6 +15,8 @@ Expected output:
 ```text
 Public selector: true
 Payload contract: true
+Ordinary FSM payload contract: false
+Hidden method is public: false
 Applied level: quiet
 ```
 

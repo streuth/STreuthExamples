@@ -21,10 +21,8 @@ its `fields` map contains the input under `visitor-name`. No JavaScript is
 required.
 
 `handleAction:` reads that named field, updates the `GreetingApp` model, and
-calls `show` again. The new document displays the greeting. The synthetic
-`HTMLAction` near the bottom of `Main.st` checks the same handler without needing
-a person to submit the form, which keeps the example runnable from the command
-line.
+calls `show` again. The new document displays the greeting, so the HTML pane is
+the visible result of both the action and the model change.
 
 `Style.css` is an ordinary linked stylesheet. `Main.st` uses
 `stylesheet: "Style.css"`, so the generated document contains the same relative

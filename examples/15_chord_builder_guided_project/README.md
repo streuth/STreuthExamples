@@ -30,17 +30,14 @@ Expected output:
 
 ```text
 Rendered the 15-slice tutorial map in the SVG pane.
-Cmd+k
-State: Done
-Chord: Cmd+k
-Inputs processed: 4
-Rendered a fresh interactive chord builder in the HTML pane.
+State: Empty
+Rendered an interactive chord builder in the HTML pane.
 ```
 
-The diagram line is produced by `TutorialSequence.st`; the following `Cmd+k` is
-printed by the canonical FSM when it enters `Done`. In
-STreuthBrowser, the final line corresponds to a fresh interactive view: choose
-one or more modifiers, optionally use Delete, then send one character.
+The diagram line is produced by `TutorialSequence.st`. In STreuthBrowser, the
+final two lines correspond to the live view: choose one or more modifiers,
+optionally use Delete, then send one character. The state highlight and chord
+status update in the HTML pane after every accepted input.
 
 ## Follow the data
 
@@ -63,19 +60,19 @@ The project deliberately crosses every boundary introduced by Tutorials
 7. The HTML DSL renders the state summary, custom controls, default payload-free
    actions, and transition table without JavaScript.
 
-The executable path sends `Cmd`, then `Shift`, then the payload-free `Delete`,
-then `k`. Assertions prove that Delete takes the Result-aware “many modifiers”
-branch, leaving `Cmd` for the terminal character. The rendered-document checks
-also prove that custom and default input views coexist in one application.
+The live HTML path lets you send `Cmd`, then `Shift`, then the payload-free
+`Delete`, then `k`. The view shows Delete taking the Result-aware “many
+modifiers” branch by changing `Cmd+Shift` back to `Cmd`, then finishes at
+`Cmd+k`. Custom and default input views coexist in that one application.
 
 ## Explore it in the IDE
 
 Open this tutorial's `.streuth-workset.st` in STreuthBrowser and run the
-workset. The HTML pane should finish on a fresh machine in `Empty`. The Modifier
+workset. The HTML pane opens on a fresh machine in `Empty`. The Modifier
 and Character inputs are forms because they carry payloads; Delete and Escape
 are ordinary action links because they do not.
 
-While interacting, inspect `liveMachine` in Object Browser. `currentState`,
+While interacting, inspect `machine` in Object Browser. `currentState`,
 `chordText`, and `inputRevision` should change together after each accepted
 action. The HTML pane follows the same live object through its Watch.
 

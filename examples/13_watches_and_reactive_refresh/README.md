@@ -13,38 +13,26 @@ Run it from the repository root:
 Expected output:
 
 ```text
-Initial refreshes: 1
-After unrelated change: 1
-After first FSM input: 2
-After switching machines: 4
+State: off
+Rendered tutorial 13; use Toggle in the HTML pane to watch the state refresh.
 ```
 
 `FsmHtmlApp follow:` chooses one explicit dependency: the machine's
 `inputRevision` field. It obtains the field through `getField:`, creates a
-`Watch`, and calls `show:` whenever the revision changes. `FSM input:` advances
-that revision after handling an input, so the view observes the completed state
-transition rather than coupling itself to every model field.
+`Watch`, and calls `show:` whenever the revision changes. Following also renders
+immediately, so the HTML pane starts with `off` highlighted rather than blank.
 
-The executable checks establish four parts of the lifecycle:
+Choose **Toggle** in STreuthBrowser. `FSM input:` completes the state transition
+and then advances `inputRevision`; the Watch therefore redraws the page with
+`on` highlighted. Choose it again to see the same live view return to `off`.
+The view is coupled to the input boundary rather than every field on the model.
 
-- Following performs one immediate render so the view is never initially
-  blank.
-- Changing the unrelated `label` field does not redraw.
-- Sending an FSM input changes `inputRevision` and redraws exactly once with
-  the new state.
-- Following a second machine stops the previous watch before installing the
-  replacement, preventing stale redraws from the old machine.
+`follow:` also stops its previous Watch before attaching to another machine.
+`Watch` supports `pause`, `resume`, and `stop` when a larger application needs
+explicit subscription lifecycle control.
 
-The final assertion stops the active watch and proves that later inputs remain
-silent. `Watch` also supports `pause` and `resume` when a subscription should be
-temporarily inactive without being discarded.
-
-`CountingFsmHtmlApp show:` records refresh requests instead of opening a live
-HTML pane. The subscription logic is still the production `follow:` method, so
-the lesson can verify the reactive boundary from the command line.
-
-Try watching `label` separately and recording its old and new values. A label
-change should activate that watch while leaving the input-revision refresh
-count unchanged.
+Try adding a second field to `ToggleFSM` and displaying it in the custom pane.
+Changing only that field will not redraw until an input advances
+`inputRevision`.
 
 STreuth documentation © 2026 Mark Kimberly Howe, licensed under CC BY-SA 4.0.

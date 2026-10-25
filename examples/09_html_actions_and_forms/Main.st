@@ -70,21 +70,6 @@ GreetingApp define: [
 ]
 
 let greeting := GreetingApp new
-
-// A synthetic action checks the same handler used by the live HTML form.
-greeting handleAction: (HTMLAction named: "save-name" fields: {
-    "visitor-name" -> "Ada"
-} asMap)
-
-Object assert: (greeting visitorName == "Ada")
-    message: "the named form field should update the model"
-Object assert: ((greeting render) contains: "Hello, Ada!")
-    message: "rerendering should display the updated model"
-Object assert: ((greeting render) contains: "<link rel=\"stylesheet\" href=\"Style.css\">")
-    message: "the rendered document should link its ordinary stylesheet"
-
-// Start the interactive lesson with an empty form.
-greeting visitorName: ""
 greeting show
 
 "Rendered tutorial 09; submit the form in the HTML pane." println

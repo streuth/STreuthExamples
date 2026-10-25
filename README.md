@@ -106,8 +106,8 @@ so the checked-in overview and STreuthBrowser's live SVG pane share one source.
     — `exposes:` publishes one receiver's selectors, while a protocol declares
     the reusable capability contract generic code may require.
 13. [`13_watches_and_reactive_refresh`](examples/13_watches_and_reactive_refresh/README.md)
-    — a view watches one explicit FSM revision, redraws after inputs, and
-    detaches stale subscriptions when it follows another machine.
+    — a live HTML view watches one explicit FSM revision and redraws after each
+    input changes the visible state.
 14. [`14_keymap_chord_dsl`](examples/14_keymap_chord_dsl/README.md) — typed
     builder syntax becomes FSM inputs, a normalized chord, and finally a
     semantic editor command binding.
@@ -137,7 +137,10 @@ Every curated example should have:
 
 - One primary concept and only enough supporting syntax to demonstrate it.
 - Its own `.streuth-workset.st`.
-- A README with the expected output and a small experiment to try.
+- A visible outcome through console, HTML, or SVG, plus a README with the
+  expected output and a small experiment to try.
+- Demonstration code rather than embedded test fixtures; testing lessons own
+  assertions and fixture-oriented examples.
 - No machine-specific absolute paths.
 - An executable check through `./bin/check-examples`.
 

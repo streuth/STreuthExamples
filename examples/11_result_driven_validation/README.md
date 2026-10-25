@@ -13,8 +13,7 @@ Run it from the repository root:
 Expected output:
 
 ```text
-Rejected: Name is required. Name must contain at least 3 characters.
-Accepted: Ada
+Rendered tutorial 11; try a blank, short, spaced, then valid name in the HTML pane.
 ```
 
 `OperatorNameValidator problemsFor:` always returns a `Result` of messages. A
@@ -30,9 +29,10 @@ The custom `FSMInputView` handler has two explicit branches:
 - One or more problems: keep the joined explanation on the model and do not
   dispatch the input.
 
-The executable assertions prove that a rejected action leaves both the model
-and `inputRevision` unchanged, while the rendered form includes the useful
-failure text. A later valid action updates the operator and clears the failure.
+The HTML pane makes both branches observable. Submit a blank or short name and
+the form rerenders with every relevant problem while the accepted operator
+remains `unassigned`. Submit `Ada` and the status changes to the accepted name
+while the failure text disappears.
 
 This is a useful Result convention for validators: the result contains
 problems, so `isNone` means success and `isMany` preserves multiple independent

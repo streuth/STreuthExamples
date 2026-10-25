@@ -33,12 +33,5 @@ document
 
 let rendered := document render
 
-Object
-    assert: (rendered contains: "Messages &amp; builders")
-    message: "HTML text is escaped"
-Object
-    assert: (rendered contains: "&lt;markup&gt;")
-    message: "body text is escaped"
-
 HTMLViewer show: rendered
 "Rendered tutorial 07 in the HTML pane." println

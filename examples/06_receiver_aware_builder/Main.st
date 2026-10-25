@@ -55,9 +55,6 @@ let article := ArticleBuilder compose: [
     paragraph: "A block can run on a builder."
 ]
 
-Object assert: (article title == "Learning Blocks")
-Object assert: (article paragraphs size == 2)
-
 article title println
 article paragraphs each: [ paragraph |
     "- \[paragraph]" println

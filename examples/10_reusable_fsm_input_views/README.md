@@ -12,9 +12,7 @@ Run it from the repository root:
 Expected output:
 
 ```text
-State: ready
-Mode: quiet
-Payload dispatches: 1
+Rendered tutorial 10; send Start, then choose a mode in the HTML pane.
 ```
 
 `Start` needs no extra value. Because no input view is registered for it,
@@ -35,10 +33,10 @@ enum input name:
 registered input-view map. The custom handler owns payload interpretation; the
 generic fallback stays small and correct for every payload-free enum input.
 
-The lesson uses synthetic `HTMLAction` values so its assertions run at the
-command line. `LessonFsmHtmlApp` overrides only `show:` to count refreshes
-instead of opening a live Browser pane; `documentFor:description:` and
-`handleAction:for:` are the production rendering and routing methods.
+The lesson opens the production `FsmHtmlApp` directly. In STreuthBrowser, use
+the ordinary **Start** action first, then choose a mode and press **Set mode**.
+The state highlight, mode, and payload-dispatch count update in the HTML pane,
+making both routing paths visible without a test-only application subclass.
 
 Try adding a payload-free `Stop` input and transition. It should work without a
 new `FSMInputView`. Then add a `SetTheme` input with its own select control and

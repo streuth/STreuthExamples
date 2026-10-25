@@ -108,59 +108,15 @@ let operatorInputView := FSMInputView
             ]
     ]
 
-// Keep the production input rendering and routing, but count refreshes instead
-// of requiring a live Browser pane during the command-line lesson.
-let LessonValidationApp := FsmHtmlApp derive: "LessonValidationApp"
-LessonValidationApp define: [
-    field refreshCount of: Number := 0
-
-    method show: of: {^Self, FSM} [ target |
-        self refreshCount: refreshCount + 1
-        self
+let app := FsmHtmlApp new
+app inputView: operatorInputView
+app pane: [
+    section: [
+        class: "summary";
+        title: "Accepted profile";
+        paragraph: "Operator: \[machine operatorName]"
     ]
 ]
-LessonValidationApp inputView: operatorInputView
+app follow: machine
 
-let app := LessonValidationApp new
-let blankProblems := validator problemsFor: ""
-Object assert: blankProblems isMany
-    message: "a blank name should retain every useful validation problem"
-Object assert: ((validator problemsFor: "Ada") isNone)
-    message: "a valid name should be represented by no problems"
-
-let invalidAction := HTMLAction
-    named: "fsm-input?value=SetOperator"
-    fields: {"operatorName" -> ""} asMap
-app handleAction: invalidAction for: machine
-
-Object assert: (machine operatorName == "unassigned")
-    message: "invalid input must not reach the FSM transition"
-Object assert: (machine inputRevision == 0)
-    message: "invalid input must not be dispatched"
-Object assert: (machine validationMessage contains: "Name is required.")
-    message: "the model should retain a useful required-name failure"
-Object assert: (machine validationMessage contains: "at least 3 characters")
-    message: "the model should retain every relevant failure"
-
-let rejectedDocument := (app
-    documentFor: machine
-    description: machine description) render
-Object assert: (rejectedDocument contains: machine validationMessage)
-    message: "the next render should present the validation failures"
-
-let validAction := HTMLAction
-    named: "fsm-input?value=SetOperator"
-    fields: {"operatorName" -> "Ada"} asMap
-app handleAction: validAction for: machine
-
-Object assert: (machine operatorName == "Ada")
-    message: "valid input should reach the typed FSM transition"
-Object assert: (machine validationMessage isEmpty)
-    message: "accepting a value should clear the previous failures"
-Object assert: (machine inputRevision == 1)
-    message: "only the valid input should be dispatched"
-Object assert: (app refreshCount == 2)
-    message: "both rejected and accepted actions should refresh once"
-
-"Rejected: \[blankProblems join: " "]" println
-"Accepted: \[machine operatorName]" println
+"Rendered tutorial 11; try a blank, short, spaced, then valid name in the HTML pane." println

@@ -32,6 +32,3 @@ workflow input: DocumentInput submit
 showState value: workflow
 workflow input: DocumentInput approve
 showState value: workflow
-
-Object assert: (workflow currentState == Published)
-    message: "the approved document should be published"

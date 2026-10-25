@@ -21,7 +21,7 @@ Learning Blocks
 Inside the builder block, receiverless `title:` and `paragraph:` messages reach
 the temporary `ArticleBuilder`. The outer `subject` variable remains lexically
 captured even though `self` has changed. The `Block on: ArticleBuilder` contract
-documents and checks the receiver expected by `compose:`.
+documents and makes the receiver expected by `compose:` visible in the result.
 
 `ArticleBuilder api` supplies the IDE's completion vocabulary inside that
 receiver-aware block: `title:` and `paragraph:`. It is an advisory tooling

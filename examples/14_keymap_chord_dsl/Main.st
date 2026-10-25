@@ -53,13 +53,6 @@ let chord := ChordRecipe
     ]
     on: machine
 
-Object assert: (machine currentState name == "Done")
-    message: "the typed recipe should complete the chord FSM"
-Object assert: (machine inputRevision == 2)
-    message: "each DSL statement should become one FSM input"
-Object assert: (chord == "Cmd+k")
-    message: "the FSM-backed builder should produce the canonical chord"
-
 let tutorialKeymap := Keymap
     named: "Tutorial"
     extending: nil
@@ -74,18 +67,7 @@ tutorialKeymap cursor: [
 ]
 
 let boundCommand := tutorialKeymap commandAt: "Command+K"
-Object assert: (boundCommand == CursorForward)
-    message: "the keymap should resolve the normalized generated chord"
-Object assert: (boundCommand group == CommandGroup Cursor)
-    message: "the typed keymap section should retain the command group"
-
 let installationRow := tutorialKeymap installationRows first
-Object assert: (installationRow first == "Cmd+k")
-    message: "installation output should retain the canonical chord"
-Object assert: (installationRow second == "Editor")
-    message: "cursor bindings should default to the editor context"
-Object assert: (installationRow last == "editor.move-right")
-    message: "installation output should use the stable command identity"
 
 "Built chord: \[chord]" println
 "Bound command: \[boundCommand name]" println
