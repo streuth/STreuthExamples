@@ -29,8 +29,8 @@ List and run the examples from this repository:
 
 `check-examples` exercises the live sibling-repository development layout.
 `audit-standalone-examples` copies every example into a disposable isolated
-repository before running it. The audit therefore fails for any example that
-still depends on `STreuthWorkspace` or another unpackaged sibling checkout.
+repository before running it. The audit therefore catches any example that
+depends on `STreuthWorkspace` or another unpackaged sibling checkout.
 `check-distribution-examples` applies that isolation check to the approved
 folders in `distribution-examples.txt`; release builds use the same list.
 `package-distribution-examples` validates that set, creates one versioned ZIP
@@ -55,10 +55,10 @@ The current standalone set is:
 - `09_html_actions_and_forms`
 - `16_guided_ide_tour`
 
-Tutorials 08 and 10 through 15 currently use FSM or keymap sources from the
-sibling `STreuthWorkspace` checkout. They remain valid in the development
-layout but must not be published as standalone downloads until those
-dependencies are promoted or packaged and the isolation audit passes.
+Tutorials 08 and 10 through 15 now use the promoted FSM and keymap standard
+libraries. They are not yet in the approved standalone release set while the
+full curriculum review settles; `distribution-examples.txt` remains the
+authoritative publication boundary.
 
 In STreuthBrowser, open the `.streuth-workset.st` inside an example directory.
 Each example is an independent workset, so loading one does not execute the

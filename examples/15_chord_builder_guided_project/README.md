@@ -1,8 +1,9 @@
 # 15 — ChordBuilder guided project
 
 This project is the integration point for the tutorial sequence. It uses the
-canonical Workspace ChordBuilder rather than recreating a simplified copy, and
-drives it through the same HTML-action boundary used by STreuthBrowser.
+canonical standard-library ChordBuilder rather than recreating a simplified
+copy, and drives it through the same HTML-action boundary used by
+STreuthBrowser.
 
 ![The fifteen-slice STreuth tutorial sequence](TutorialSequence.svg)
 

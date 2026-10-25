@@ -23,9 +23,9 @@ with that `State` as `self`, so `self on:next:` declares a transition on the
 current state. `input:` looks for a transition belonging to the current state
 and moves to its declared successor.
 
-The workset loads the canonical core FSM sources from the sibling
-`STreuthWorkspace` checkout. It lists only the model layer so this lesson does
-not also load the HTML and SVG view layers.
+The workset uses the canonical core FSM sources provided by the STreuth standard
+library. This lesson uses only the model layer; it does not create an HTML or
+SVG view.
 
 Try replacing `approve` with `revise`. The machine returns to `draft`. Then add
 an `enter:` block to `Review` or use `on:do:next:` to attach an action to the
