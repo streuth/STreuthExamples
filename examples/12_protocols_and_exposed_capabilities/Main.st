@@ -24,11 +24,11 @@ LevelConsoleFSM define: [
         let Ready := machine stateNamed: "ready"
 
         machine fsm: [
-            self inputType: ConsoleInput
-            self initialState: Ready activateOnStart: false
+            inputType: ConsoleInput;
+            initialState: Ready activateOnStart: false
 
-            self state: Ready do: [
-                self on: ConsoleInput SetLevel do: [
+            state: Ready do: [
+                on: ConsoleInput SetLevel do: [
                     machine appliedLevel: machine pendingLevel
                 ]
             ]

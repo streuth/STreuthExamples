@@ -28,15 +28,15 @@ ConsoleFSM define: [
         let Ready := machine stateNamed: "ready"
 
         machine fsm: [
-            self inputType: ConsoleInput
-            self initialState: Waiting activateOnStart: false
+            inputType: ConsoleInput;
+            initialState: Waiting activateOnStart: false
 
-            self state: Waiting do: [
-                self on: ConsoleInput Start next: Ready
+            state: Waiting do: [
+                on: ConsoleInput Start next: Ready
             ]
 
-            self state: Ready do: [
-                self on: ConsoleInput SetMode do: [
+            state: Ready do: [
+                on: ConsoleInput SetMode do: [
                     machine mode: machine pendingMode
                 ]
             ]

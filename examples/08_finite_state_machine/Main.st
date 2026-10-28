@@ -10,16 +10,16 @@ let Review := workflow stateNamed: "review"
 let Published := workflow stateNamed: "published"
 
 workflow fsm: [
-    self inputType: DocumentInput
-    self initialState: Draft activateOnStart: false
+    inputType: DocumentInput;
+    initialState: Draft activateOnStart: false
 
-    self state: Draft do: [
-        self on: DocumentInput submit next: Review
+    state: Draft do: [
+        on: DocumentInput submit next: Review
     ]
 
-    self state: Review do: [
-        self on: DocumentInput approve next: Published;
-        self on: DocumentInput revise next: Draft
+    state: Review do: [
+        on: DocumentInput approve next: Published;
+        on: DocumentInput revise next: Draft
     ]
 ]
 

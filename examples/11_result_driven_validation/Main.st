@@ -45,11 +45,11 @@ ProfileFSM define: [
         let Editing := machine stateNamed: "editing"
 
         machine fsm: [
-            self inputType: ProfileInput
-            self initialState: Editing activateOnStart: false
+            inputType: ProfileInput;
+            initialState: Editing activateOnStart: false
 
-            self state: Editing do: [
-                self on: ProfileInput SetOperator do: [
+            state: Editing do: [
+                on: ProfileInput SetOperator do: [
                     machine operatorName: machine pendingOperatorName
                 ]
             ]

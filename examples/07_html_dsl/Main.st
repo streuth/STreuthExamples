@@ -8,11 +8,11 @@ document
         title: lessonTitle;
         charset: "utf-8";
         viewport: "width=device-width, initial-scale=1";
-        self styleName: "body" list: {
+        styleName: "body" list: {
             "font-family: system-ui, sans-serif",
             "margin: 2rem",
             "color: #243047"
-        }
+        };
     ]
     body: [
         header: [

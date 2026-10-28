@@ -12,15 +12,15 @@ ToggleFSM define: [
         let On := machine stateNamed: "on"
 
         machine fsm: [
-            self inputType: ToggleInput
-            self initialState: Off activateOnStart: false
+            inputType: ToggleInput;
+            initialState: Off activateOnStart: false
 
-            self state: Off do: [
-                self on: ToggleInput Toggle next: On
+            state: Off do: [
+                on: ToggleInput Toggle next: On
             ]
 
-            self state: On do: [
-                self on: ToggleInput Toggle next: Off
+            state: On do: [
+                on: ToggleInput Toggle next: Off
             ]
         ]
 
